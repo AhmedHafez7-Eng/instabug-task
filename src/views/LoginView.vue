@@ -202,16 +202,11 @@
             box-shadow: 0px 0px 2px rgba(0,0,0,0.2);
             background-color: #FFF;
             padding: 50px 30px;
-        
-            img{
-                width: 30px;
-            }
-        }
 
-        .header{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            .header{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
 
                 img {
                     width: 100px;
@@ -224,6 +219,61 @@
                     font-weight: 500;
                     letter-spacing: 1px;
                 }
+            }
+        
+           .socialBtns{
+                margin-top: 40px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px 0;
+                justify-content: center;
+                align-items: center;
+
+                .btn {
+                    max-width: 500px;
+                    width: 100%;
+                    position: relative;
+                    background-color: #111;
+                    display: flex;
+                    justify-content: center;
+                    text-align: center;
+                    align-items: center;
+                    gap: 10px 0;
+                    padding: 10px;
+                    border-radius: 5px;
+                    color: #FFF;
+                    font-size: 18px;
+                    font-weight: 500;
+                    letter-spacing: 1px;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    border: 1px solid lightgray;
+
+                    &:hover {
+                        color: #FFF;
+                    }
+                    &:first-child {
+                        background-color: #2375f8;
+                    }
+                    &:nth-child(2) {
+                        background-color: #333;
+                    }
+                    &:last-child {
+                        background-color: #f0f0f0;
+                        color: #111;
+                    }
+                    img{
+                        position: absolute;
+                        top: 50%;
+                        left: 0;
+                        width: 25px;
+                        height: 25px;
+                        transform: translateY(-50%);
+                        margin-left: 20px;
+                    }
+                }
+            }
+            
         }
     }
 
