@@ -11,10 +11,16 @@
         data() {
             return {
                 authenticated: false,
-                mockAccount: {
-                    username: "ahmed",
-                    password: "ahmed7"
-                },
+                mockAccount: [
+                    { email: "mohamed@instabug.com", password: "A12345678"  },
+                    { email: "mohamed1@instabug.com", password: "A12345678" },
+                    { email: "mohamed2@instabug.com", password: "A12345678" },
+                    { email: "mohamed3@instabug.com", password: "A12345678" },
+                    { email: "mohamed4@instabug.com", password: "A12345678" },
+                    { email: "mohamed5@instabug.com", password: "A12345678" },
+                    { email: "mohamed6@instabug.com", password: "A12345678" },
+                    { email: "mohamed7@instabug.com", password: "A12345678" },
+                ],
 
                 isLoggedIn: localStorage.getItem("isLoggedIn"),
             }
@@ -37,15 +43,16 @@
 </script>
 
 <style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,700&display=swap');
+   
+   *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        outline: none;
+    }
     body {
         background-color: #F0F0F0;
-    }
-    h1 {
-        padding: 0;
-        margin-top: 0;
-    }
-    #app {
-        width: 1024px;
-        margin: auto;
+        font-family: 'Roboto', sans-serif;
     }
 </style>
