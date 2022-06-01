@@ -35,6 +35,11 @@
             </div>
              <p id="desc" v-for="(slide, index) in slides"
                 :key="index" :class="{ active: isActive(index) }">{{slide.desc}}</p>
+
+            <div class="bullets">
+                <span id="bullet" v-for="(slide, index) in slides"
+                    :key="index" :class="{ active: isActive(index) }" @click="selectSlide(index)"></span>
+            </div>
         </div>
         <div class="loginBx">
 
@@ -164,6 +169,14 @@
             setActive: function (slide) {
                 this.current = slide;
             },
+            selectSlide: function(i) {
+                this.current = i;
+                this.resetPlay();
+            },
+            resetPlay: function() {
+                clearInterval(this.timer);
+                this.startRotation();
+            },
 
             // =========== Login Method ===========
             login() {
@@ -268,6 +281,25 @@
             #desc.active {
                 opacity: 1;
                 display: block;
+            }
+            .bullets{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 30px 0;
+                gap: 0 15px;
+
+                #bullet{
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background-color: grey;
+                    cursor: pointer;
+
+                    &.active {
+                        background-color: #FFF;
+                    }
+                }
             }
         }
 

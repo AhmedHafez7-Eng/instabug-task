@@ -20,6 +20,7 @@
             logout() {
                 this.authenticated = false;
                 localStorage.setItem("isLoggedIn", "false");
+                localStorage.setItem("userEmail", "");
             },
 
             getEmail(){
