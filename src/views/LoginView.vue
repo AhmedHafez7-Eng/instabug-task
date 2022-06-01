@@ -78,11 +78,11 @@
 
                 <div class="inputBx">
                     <label>Work Email</label>
-                    <input type="text" id="email" name="email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$" placeholder="you@company.com" v-model="emailField">
+                    <input type="text" id="email" name="email" pattern="/^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/" placeholder="you@company.com" v-model="emailField">
                 </div>
                 <div class="inputBx">
                     <label class="passLabel">Password <span><a href="#">Forgot password?</a></span></label>
-                    <input type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$" id="password" name="password" placeholder="6+ Characters" v-model="passwordField">
+                    <input type="password" pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/" id="password" name="password" placeholder="6+ Characters" v-model="passwordField">
                 </div>
                 <div class="inputBx">
                     <button type="submit" v-on:click="login()" name="submit" v-bind:disabled="emailField === '' || passwordField===''">Log in</button>
