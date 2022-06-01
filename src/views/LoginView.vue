@@ -271,7 +271,7 @@
                 display: none;
                 opacity: 0;
                 color: #FFF;
-                font-size: 30px;
+                font-size: 20px;
                 line-height: 1.5;
                 text-align: center;
                 text-align:center;
@@ -551,13 +551,13 @@
             }
         }
 
-        @media(max-width: 450px) {
-           #login{
-               .sliderBx{
-                    #desc {
-                        font-size: 20px;
-                    }
-                }
-           }
-        }
+        // @media(max-width: 450px) {
+        //    #login{
+        //        .sliderBx{
+        //             #desc {
+        //                 font-size: 20px;
+        //             }
+        //         }
+        //    }
+        // }
 </style>
