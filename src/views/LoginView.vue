@@ -2,13 +2,35 @@
     <div id="login">
         <div class="sliderBx" id="sliderBx">
             <div class="slideshow__container js-slideshow">
-                <img
+                <!-- <img
                 v-for="(slide, index) in slides"
+                v-bind:src="slide.url"
                 :key="index"
-                :src="slide.url"
                 :class="{ active: isActive(index) }"
                 @mouseover="stopRotation"
                 @mouseout="startRotation"
+                alt="slide"
+                /> -->
+                <img
+                src="../assets/slider1.svg"
+                :class="{ active: isActive(0) }"
+                @mouseover="stopRotation"
+                @mouseout="startRotation"
+                alt="slide"
+                />
+                <img
+                src="../assets/slider2.svg"
+                :class="{ active: isActive(1) }"
+                @mouseover="stopRotation"
+                @mouseout="startRotation"
+                alt="slide"
+                />
+                <img
+                src="../assets/slider3.svg"
+                :class="{ active: isActive(2) }"
+                @mouseover="stopRotation"
+                @mouseout="startRotation"
+                alt="slide"
                 />
             </div>
              <p id="desc" v-for="(slide, index) in slides"
@@ -36,6 +58,44 @@
                 </div>
             </div>
 
+            <div class="separator"></div>
+
+            <div class="formBx">
+
+                <p class="message" v-if="message">{{message}}</p>
+
+                <!-- <p v-if="errors.length">
+                    <b>Please correct the following error(s):</b>
+                    <ul>
+                    <li v-for="error in errors" :key="error">{{ error }}</li>
+                    </ul>
+                </p> -->
+
+                <div class="inputBx">
+                    <label>Work Email</label>
+                    <input type="text" id="email" name="email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$" placeholder="you@company.com" v-model="emailField">
+                </div>
+                <div class="inputBx">
+                    <label class="passLabel">Password <span><a href="#">Forgot password?</a></span></label>
+                    <input type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$" id="password" name="password" placeholder="6+ Characters" v-model="passwordField">
+                </div>
+                <div class="inputBx">
+                    <button type="submit" v-on:click="login()" name="submit" v-bind:disabled="emailField === '' || passwordField===''">Log in</button>
+                </div>
+                <div class="info">
+                    <p>Don't have an account? <a href="#">Sign up</a></p>
+                    <p><a href="#">Login via SSO</a></p>
+                </div>
+                <p>Trusted by the top companies</p>
+                <div class="imgBx">
+                    <img src="../assets/login1.png" alt="Img">
+                    <img src="../assets/login2.png" alt="Img">
+                    <img src="../assets/login3.webp" alt="Img">
+                    <img src="../assets/login4.png" alt="Img">
+                    <img src="../assets/login5.png" alt="Img">
+                </div>
+            </div>
+
 
             <!-- <p v-if="message">{{message}}</p>
         <h1>Login</h1>
@@ -47,30 +107,34 @@
 </template>
 
 <script>
-
+// import { required, email, minLength } from 'vuelidate/lib/validators';
     export default {
         name: 'LoginView',
         data() {
             return {
-
                 current: 0,
                 slides: [
-                        {url:'https://svgshare.com/i/hrB.svg', desc:'Accelerate your entire mobile team workflow'},
-                        {url:'https://svgshare.com/i/hrA.svg', desc:'the most comprehensive bug reporting tool for mobile apps'},
-                        {url:'https://svgshare.com/i/hrV.svg', desc:'secure crash reporting with real-time alerts'},
+                        {url:"slider1.svg", desc:'Accelerate your entire mobile team workflow'},
+                        {url:'slider2.svg', desc:'the most comprehensive bug reporting tool for mobile apps'},
+                        {url:'slider3.svg', desc:'secure crash reporting with real-time alerts'},
                         ],
                 speed: 3000,
                 timer: null,
 
-                input: {
-                    username: "",
-                    password: ""
-                },
+                // input: {
+                //     email: "",
+                //     password: ""
+                // },
                 message: '',
+                disableButton: true,
+                emailField: "",
+                passwordField: "",
+                // errors: [],
             }
         },
         methods: {
 
+        // =========== Slider Methods ===========
             startRotation: function () {
                 this.timer = setInterval(this.next, this.speed);
             },
@@ -106,11 +170,12 @@
                 this.current = slide;
             },
 
+            // =========== Login Method ===========
             login() {
-                if(this.input.email != "" && this.input.password != "") {
 
+                if(this.emailField != "" && this.passwordField != "") {
                     for(let i = 0; i < this.$parent.mockAccount.length; i++) {
-                        if(this.input.email == this.$parent.mockAccount[i].email && this.input.password == this.$parent.mockAccount[i].password) {
+                        if(this.emailField == this.$parent.mockAccount[i].email && this.passwordField == this.$parent.mockAccount[i].password) {
                             this.$emit("authenticated", true);
                             localStorage.setItem("isLoggedIn", true);
                             this.$router.replace({ name: "welcome" });
@@ -121,13 +186,27 @@
                         }
                     }
                 } else {
-                    console.log("email and password are required");
+                    // console.log("email and password are required");
+                    this.message = "email and password are required";
                 }
-            }
+            },
+
+            // =========== Form Validation ===========
+            
         },
         mounted: function () {
             this.startRotation();
-        }
+        },
+        // validations: {
+        //     emailField: {
+        //         required,
+        //         email,
+        //     },
+        //     passwordField: {
+        //         required,
+        //         minLength: minLength(6),
+        //     },
+        // },
     }
 </script>
 
@@ -135,7 +214,6 @@
 
     #login {
         background-color: #FFF;
-        // padding: 10px;
         display: flex;
         min-height: 100vh;
 
@@ -273,7 +351,158 @@
                     }
                 }
             }
-            
+
+            .separator {
+                margin-top: 40px;
+                width: 100%;
+                height: 1px;
+                background-color: lightgray;
+                text-align: center;
+                line-height: 0;
+
+                &::after {
+                    content: "OR";
+                    font-size: 24px;
+                    font-weight: 500;
+                    letter-spacing: 1px;
+                    background-color: #FFF;
+                }
+            }
+
+            .formBx{
+                margin-top: 30px;
+                display:flex;
+                flex-direction: column;
+                background-color: #FFF;
+                gap: 20px 0;
+                padding: 0 40px;
+
+                .message{
+                    margin-top: 20px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    letter-spacing: 1px;
+                    color: red;
+                    text-transform: capitalize;
+                }
+
+                .inputBx {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px 0;
+                    // justify-content: center;
+                    // align-items: center;
+                    padding: 10px;
+                    font-size: 18px;
+
+                    label{
+                        font-size: 14px;
+                        font-weight: 500;
+                        letter-spacing: 1px;
+                    }
+                    label.passLabel{
+                        display:flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        a{
+                            color: #777;
+                            font-size: 14px;
+                            font-weight: 500;
+                            letter-spacing: 1px;
+                            text-decoration: none;
+                            transition: all 0.3s ease;
+
+                            &:hover {
+                                color: #2375f8;
+                            }
+                        }
+                    }
+                    input[type="text"],
+                    input[type="password"] {
+                        padding: 10px 15px;
+                        border: 1px solid lightgray;
+                        border-radius: 3px;
+                        font-size: 16px;
+                    }
+                    button[type="submit"]{
+                        color: #FFF;
+                        font-size: 18px;
+                        font-weight: 500;
+                        letter-spacing: 1px;
+                        padding: 10px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        transition: all 0.3s;
+                        border: 1px solid lightgray;
+                        text-transform: capitalize;
+
+                        &:disabled {
+                            opacity: 0.9;
+                            background-color: #CCC;
+                            cursor: not-allowed;
+                        }
+
+                        &:valid {
+                            background-color: #2375f8;
+                        }
+                    }
+                }
+                .info{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 10px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    letter-spacing: 1px;
+                    text-align: center;
+                    margin-top: -30px;
+
+                    a{
+                        color: #2375f8;
+                        font-size: 14px;
+                        font-weight: 600;
+                        letter-spacing: 1px;
+                        text-decoration: none;
+                        transition: all 0.3s ease;
+                    }
+
+                    &+p{
+                        width: 100%;
+                        margin: 10px 0;
+                        text-align: center;
+                        color: #777;
+                        letter-spacing: 1px;
+                    }
+                }
+                .imgBx{
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+                    align-items: center;
+                    gap: 10px;
+                    margin-top: 20px;
+                    width: 100%;
+                    height: 100%;
+                    background-color: #FFF;
+                    img {
+                        width: 80px;
+                        height: 80px;
+                        object-fit: contain;
+                        filter: grayscale(100%);
+                        opacity: 0.5;
+
+                        &:first-child {
+                            width: 50px;
+                            height: 50px;
+                        }
+
+                        &:hover {
+                        cursor: pointer;
+                    }
+                    }
+                }
+            }
         }
     }
 
