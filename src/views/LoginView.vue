@@ -120,11 +120,6 @@
                         ],
                 speed: 3000,
                 timer: null,
-
-                // input: {
-                //     email: "",
-                //     password: ""
-                // },
                 message: '',
                 disableButton: true,
                 emailField: "",
@@ -178,6 +173,7 @@
                         if(this.emailField == this.$parent.mockAccount[i].email && this.passwordField == this.$parent.mockAccount[i].password) {
                             this.$emit("authenticated", true);
                             localStorage.setItem("isLoggedIn", true);
+                            localStorage.setItem("userEmail", this.emailField);
                             this.$router.replace({ name: "welcome" });
                             break;
                         } else {
